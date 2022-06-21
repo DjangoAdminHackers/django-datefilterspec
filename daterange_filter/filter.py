@@ -143,10 +143,16 @@ class DateTimeRangeForm(DateRangeFilterBaseForm):
 
 class DateRangeFilter(admin.filters.FieldListFilter):
     template = 'daterange_filter/filter.html'
+    since_default_today_format = None
 
     def __init__(self, field, request, params, model, model_admin, field_path):
         self.lookup_kwarg_since = '%s%s__gte' % (FILTER_PREFIX, field_path)
         self.lookup_kwarg_upto = '%s%s__lte' % (FILTER_PREFIX, field_path)
+        
+        if self.since_default_today_format:
+            if self.lookup_kwarg_since not in params and self.lookup_kwarg_upto not in params:
+                params[self.lookup_kwarg_since] = datetime.date.today().strftime(self.since_default_today_format)
+        
         super(DateRangeFilter, self).__init__(
             field, request, params, model, model_admin, field_path)
         self.form = self.get_form(request)
