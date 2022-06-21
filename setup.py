@@ -3,18 +3,18 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-daterange-filter',
-    version='1.3.0',
+    version='1.3.1',
     description='Allow to filter by a custom date range on the Django Admin',
     long_description=open('README.rst').read(-1),
     author='Tomas Zulberti',
     author_email='tzulberti@gmail.com',
-    url='http://github.com/tzulberti/django-datefilterspec',
+    url='https://github.com/simon-online/django-datefilterspec',
     keywords=[
         'django admin',
         'django date range',
     ],
     install_requires=[
-        "Django",
+        "Django>=1.8,<1.9",
     ],
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
